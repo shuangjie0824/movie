@@ -1,0 +1,39 @@
+#服务名称
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/movie?characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+  cache:
+    redis:
+      #使用前缀
+      use-key-prefix: true
+      #redis过期时间
+      time-to-live: 60s
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**
+  global-config:
+    db-config:
+      id-type: uuid
+  type-aliases-package: com.movie.api.model.entity
+
+#Dubbo配置
+dubbo:
+  registry:
+    address: zookeeper://localhost:2181
+  scan:
+    base-packages: com.movie.service
+  provider:
+    timeout: 50000
+    retries: 0
+  application:
+    id: dubbo-provider
+    name: dubbo-provider
+#密码的盐
+movie:
+  config:
+    password-salt: fiwsyhrf9wejroi2huio3y4234operw3

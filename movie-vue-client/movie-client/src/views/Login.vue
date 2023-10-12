@@ -39,7 +39,8 @@
 <script>
 
 import { Login } from "../api/user"
-
+import md5 from "js-md5"
+    
 export default {
     data() {
         return {
@@ -53,7 +54,7 @@ export default {
         postLogin() {
             const LoginData = {
                 username: this.username,
-                password: this.password,
+                password: md5(this.password),
                 remember: this.remember
             };
             console.log(LoginData);
